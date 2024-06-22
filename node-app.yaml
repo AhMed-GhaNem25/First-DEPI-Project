@@ -1,0 +1,38 @@
+---
+- name: install node and npm
+  hosts: your-server-ip
+  become: yes
+  tasks:
+    - name: update apt repo and cache
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+    - name: Install npm and node on the server
+      apt:
+        pkg:
+          - nodejs
+          - npm
+
+- name : deploy node app
+  hosts: your-server-ip
+  vars_files:
+    - "yourpath/Vars.yaml"
+  tasks:
+    - name: copy the artifact to the and unpack
+      unarchive:
+        src: "yourpath/simple-nodejs-app/{{app_file}}.tgz"
+        dest: "{{dest_path}}"
+
+    - name: Install the dependencies
+      npm: 
+        path: "{{dest_path}}/package"
+    
+    - name: start the application
+      command: 
+        chdir: "{{dest_path}}/package/app/"
+        cmd: node server.js
+      async: 45
+      poll: 0
+
+    - name: make sure the app is running
+      shell: ps aux | grep node
+      register: app_status
+    - debug: msg=" App Status tracker :{{ app_status.stdout}}"
