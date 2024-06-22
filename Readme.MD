@@ -10,8 +10,11 @@ git clone https://github.com/Ahmed-Moourad/simple-nodejs-app
 
 ## 2: Install dependencies
  ```bash
+
 apt update
+
 apt install ansible
+
 ```
 ## 3: Config your hosts file 
  Write the server IP & key's information. 
@@ -22,12 +25,16 @@ apt install ansible
 ## 5: Push the configuration to the server 
 by using the command 
 ``` bash
+
 sudo ansible-playbook -i hosts your-playbook-file-name
+
 ```
 ### Important note: If you face a big red error, reinstall Ansible by using the pip command. ###
 
 ```bash
+
 pip install ansible
+
 ```
 
 ## 6: Additional Resources
