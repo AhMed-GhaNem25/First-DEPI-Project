@@ -9,10 +9,10 @@ Installation
 git clone https://github.com/Ahmed-Moourad/simple-nodejs-app
 
 ## 2: Install dependencies
-``` bash
+ bash
 apt update
 apt install ansible
-```
+
 ## 3: Config your hosts file 
  Write the server IP & key's information. 
 
